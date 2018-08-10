@@ -1,0 +1,29 @@
+{
+  "name": "hotel-booking",
+  "version": "1.0.0",
+  "description": "hotel booking system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ridozaen/hotel-booking.git"
+  },
+  "author": "ridozaen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ridozaen/hotel-booking/issues"
+  },
+  "homepage": "https://github.com/ridozaen/hotel-booking#readme",
+  "dependencies": {
+    "@google-cloud/storage": "^1.7.0",
+    "bcrypt": "^3.0.0",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "multer": "^1.3.1",
+    "pg": "^7.4.3",
+    "sequelize": "^4.38.0"
+  }
+}
