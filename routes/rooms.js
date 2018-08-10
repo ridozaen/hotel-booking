@@ -4,12 +4,21 @@ const upload = require("../helpers/upload");
 const { isAuthorized } = require("../middleware/auth");
 
 router.get("/", isAuthorized, roomController.findAll);
+router.get("/:id", isAuthorized, roomController.findById);
 router.post(
   "/add",
   isAuthorized,
   upload.multer.single("image"),
   upload.sendUploadToGCS,
-  roomController.createRooms
+  roomController.createRoom
 );
+router.put(
+  "/update/:id",
+  isAuthorized,
+  upload.multer.single("image"),
+  upload.sendUploadToGCS,
+  roomController.updateRoom
+);
+router.delete("/delete/:id", isAuthorized, roomController.deleteRoom);
 
 module.exports = router;
