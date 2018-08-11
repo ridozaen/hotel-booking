@@ -3,7 +3,8 @@ function isAuthenticated(req, res, next) {
   let token = req.headers.authorization;
   if (token) {
     try {
-      jwt.verify(token, process.env.SECRET_KEY);
+      const user = jwt.verify(token, process.env.SECRET_KEY);
+      req.user = user;
       next();
     } catch (err) {
       res.status(400).send({ message: err.message });

@@ -1,6 +1,50 @@
 const { Room } = require("../models");
+const { Reservation } = require("../models");
+const models = require("../models");
+const {
+  convertStringToDate,
+  timeCheckIn,
+  timeCheckOut
+} = require("../helpers/helpers");
 
 module.exports = {
+  findAvailRoom: async (req, res) => {
+    let { checkInDate, checkOutDate } = req.query;
+    checkInDate = new Date(
+      convertStringToDate(checkInDate) + " " + timeCheckIn
+    );
+    checkOutDate = new Date(
+      convertStringToDate(checkOutDate) + " " + timeCheckOut
+    );
+
+    let rooms = await Room.findAll({
+      raw: true
+    });
+    if (rooms.length === 0) {
+      res.status(400).json({
+        message: "Room not available",
+        rooms
+      });
+    }
+    let newRooms = [];
+    for (i = 0; i < rooms.length; i++) {
+      let roomAvail = await Reservation.checkAvailability(
+        checkInDate,
+        checkOutDate,
+        rooms[i].id,
+        Room
+      );
+      if (roomAvail.length === 0 || roomAvail[0].available > 0) {
+        if (roomAvail.length !== 0) {
+          rooms[i].available = roomAvail[0].available;
+        } else {
+          rooms[i].available = rooms[i].quantity;
+        }
+        newRooms.push(rooms[i]);
+      }
+    }
+    res.status(200).json(newRooms);
+  },
   findAll: (req, res) => {
     Room.findAll()
       .then(rooms => {

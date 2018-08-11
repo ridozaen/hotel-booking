@@ -45,5 +45,42 @@ module.exports = {
       .catch(function(err) {
         res.status(400).json({ message: err.message });
       });
+  },
+  getUsers: (req, res) => {
+    User.findAll()
+      .then(function(users) {
+        if (users) {
+          res.status(200).json({ message: "retrieve users success", users });
+        } else {
+          res.status(404).json({ message: "failed to get users" });
+        }
+      })
+      .catch(function(err) {
+        res.status(400).json({ message: "failed to get users" });
+      });
+  },
+  getUserById: (req, res) => {
+    let id = req.params.id;
+    User.findById(id)
+      .then(function(user) {
+        if (user) {
+          res.status(200).json({ message: "get user success", user });
+        } else {
+          res.status(404).json({ message: "failed to get user" });
+        }
+      })
+      .catch(function(err) {
+        res.status(400).json({ message: "failed to get user" });
+      });
+  },
+  deleteUserById: (req, res) => {
+    let id = req.params.id;
+    User.destroy({ where: { id } })
+      .then(changes => {
+        res.status(200).json({ message: "delete success", changes });
+      })
+      .catch(error => {
+        res.status(400).json({ message: "failed to delete user", error });
+      });
   }
 };

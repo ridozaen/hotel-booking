@@ -3,8 +3,9 @@ const roomController = require("../controllers/roomsController");
 const upload = require("../helpers/upload");
 const { isAuthorized } = require("../middleware/auth");
 
-router.get("/", isAuthorized, roomController.findAll);
-router.get("/:id", isAuthorized, roomController.findById);
+router.get("/", roomController.findAll);
+router.get("/avail", roomController.findAvailRoom);
+router.get("/:id", roomController.findById);
 router.post(
   "/add",
   isAuthorized,
