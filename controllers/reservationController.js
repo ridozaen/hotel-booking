@@ -6,6 +6,20 @@ const {
 } = require("../helpers/helpers");
 
 module.exports = {
+  getAllBooks: (req, res) => {
+    let userId = req.user.id;
+    Reservation.findAll({
+      where: {
+        userId
+      }
+    })
+      .then(books => {
+        res.status(200).json({ message: "retrieve booking success", books });
+      })
+      .catch(error => {
+        res.status(400).json({ message: "retrieve booking failed", error });
+      });
+  },
   booking: async (req, res) => {
     let { checkInDate, checkOutDate, numberOfRooms, roomId } = req.body;
     const userId = req.user.id;
