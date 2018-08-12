@@ -1,10 +1,5 @@
 # hotel-booking
-Simple hotel booking application
-
-## Admin Login Info
->username: admin
-
->password: admin
+Simple hotel booking API using Nodejs, ExpressJs and Postgresql as database.
 
 ## Routes
 
@@ -38,6 +33,7 @@ KEYFILE
 ```
 
 ## Usage
+
 ```bash
 npm install
 npm install -g sequelize-cli
@@ -53,3 +49,9 @@ sequelize db:migrate
 Seed Roles and admin data
 ```bash
 sequelize db:seed:all
+```
+
+## Admin Login Info
+>username: admin
+
+>password: admin
