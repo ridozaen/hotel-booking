@@ -1,6 +1,8 @@
 # hotel-booking
 Simple hotel booking API using Nodejs, ExpressJs and Postgresql as database.
 
+> Github link [hotel-booking](https://github.com/ridozaen/hotel-booking)
+
 ## Routes
 
 | Route                    | HTTP   | Parameter                                                                                  | Description                                                      |
@@ -13,7 +15,7 @@ Simple hotel booking API using Nodejs, ExpressJs and Postgresql as database.
 | /users/signup            | POST   | Body: { fullName, username, password }                                                     | sign up / create user record                                     |
 | /users/signin            | POST   | Body: { username, password }                                                               | sign in user                                                     |
 | /rooms                   | GET    |                                                                                            | get all rooms records                                            |
-| /rooms/avail             | GET    |                                                                                            | get all rooms available                                          |
+| /rooms/avail?checkInDate=DDMMYYYY&checkOutDate=DDMMYYYY             | GET    |                                                                                            | get all rooms available                                          |
 | /rooms/:id               | GET    |                                                                                            | get single rooms by id                                           |
 | /rooms/add               | POST   | Header {Authorization : Token},  Body: { type, description, image, quantity, price }       | add new room record (admin only)                                 |
 | /rooms/update/:id        | PUT    | Header {Authorization : Token}, Body: {type,description,image,quantity,price}              | update/edit room record based on ID (admin only)                 |
